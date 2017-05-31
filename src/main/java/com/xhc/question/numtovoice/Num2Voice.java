@@ -11,38 +11,37 @@ public class Num2Voice {
 	public static Map<Character, String> numMap = new HashMap<Character, String>();
 	public static Map<Integer, String> levelMap = new HashMap<Integer, String>();
 	static{
-		numMap.put('1', "Ò»");
-		numMap.put('2', "¶ş");
-		numMap.put('3', "Èı");
-		numMap.put('4', "ËÄ");
-		numMap.put('5', "Îå");
-		numMap.put('6', "Áù");
-		numMap.put('7', "Æß");
-		numMap.put('8', "°Ë");
-		numMap.put('9', "¾Å");
-		numMap.put('0', "Áã");
+		numMap.put('1', "ä¸€");
+		numMap.put('2', "äºŒ");
+		numMap.put('3', "ä¸‰");
+		numMap.put('4', "å››");
+		numMap.put('5', "äº”");
+		numMap.put('6', "å…­");
+		numMap.put('7', "ä¸ƒ");
+		numMap.put('8', "å…«");
+		numMap.put('9', "ä¹");
+		numMap.put('0', "é›¶");
 		
 		levelMap.put(1, "");
-		levelMap.put(2, "Íò");
-		levelMap.put(3, "ÒÚ");
+		levelMap.put(2, "ä¸‡");
+		levelMap.put(3, "äº¿");
 	}
 
 	public static void main(String[] args) {
 		Scanner input=new Scanner(System.in);
 		String num = input.nextLine();
-		
-		
 		List<String> formatNum = new ArrayList<String>();
 		StringBuilder resultVoice = new StringBuilder();
+
 		if(num != null && num.length()>0){
-			
 			try {
 				int test = Integer.parseInt(num);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
-				System.out.println("ÊäÈëµÄ×Ö·û²»ÊÇ´¿Êı×Ö¡£");
+				System.out.println("è¾“å…¥çš„å­—ç¬¦ä¸æ˜¯çº¯æ•°å­—ï¼Œæˆ–è¶…å‡ºèŒƒå›´:" + Integer.MIN_VALUE + " - " + Integer.MAX_VALUE);
+				return;
 			}
-			
+
 			for(int i=0 , j=num.length()/4 * 4 < num.length() ? num.length()/4 +1 : num.length()/4 ; i<j ; i++){
 				int begin = num.length() - (i+1)*4 < 0 ? 0 : num.length() - (i+1)*4;
 				int end = num.length() - i*4;
@@ -58,27 +57,26 @@ public class Num2Voice {
 				String shi = "";
 				String ge = "";
 				if(wei.length > 3){
-					qian = numMap.get(wei[0]) + "Ç§";
-					bai = numMap.get(wei[1]) + "°Ù";
-					shi = numMap.get(wei[2]) + "Ê®";
-					ge = numMap.get(wei[3]);
+					qian = wei[0] == '0' ? "é›¶" : numMap.get(wei[0]) + "åƒ";
+					bai = wei[1] == '0' ? "é›¶" : numMap.get(wei[1]) + "ç™¾";
+					shi = wei[2] == '0' ? "é›¶" : numMap.get(wei[2]) + "å";
+					ge = wei[3] == '0' ? "é›¶" : numMap.get(wei[3]);
 				}else if(wei.length > 2){
-					bai = numMap.get(wei[0]) + "°Ù";
-					shi = numMap.get(wei[1]) + "Ê®";
-					ge = numMap.get(wei[2]);
+					bai = wei[0] == '0' ? "é›¶" : numMap.get(wei[0]) + "ç™¾";
+					shi = wei[1] == '0' ? "é›¶" : numMap.get(wei[1]) + "å";
+					ge = wei[2] == '0' ? "é›¶" : numMap.get(wei[2]);
 				}else if(wei.length > 1){
-					shi = numMap.get(wei[0]) + "Ê®";
-					ge = numMap.get(wei[1]);
+					shi = wei[0] == '0' ? "é›¶" : numMap.get(wei[0]) + "å";
+					ge = wei[1] == '0' ? "é›¶" : numMap.get(wei[1]);
 				}else if(wei.length > 0){
-					ge = numMap.get(wei[0]);
+					ge = wei[0] == '0' ? "é›¶" : numMap.get(wei[0]);
 				}
 				
-				
 				String str4 = qian+bai+shi+ge + level;
+				str4 = str4.replaceAll("[é›¶]+", "");
 				resultVoice.insert(0, str4);
 			}
-			
-			System.out.println("×ª»»½á¹û£º" + resultVoice.toString());
+			System.out.println("è½¬æ¢ç»“æœï¼š" + resultVoice.toString());
 			
 		}
 		
